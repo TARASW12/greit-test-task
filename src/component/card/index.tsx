@@ -6,7 +6,7 @@ import { Selection } from '@/assets/svg/selection';
 import { Split } from '@/component/split';
 import { ImageSlider } from '@/component/slider';
 import { InfoBlock } from '@/component/InfoBlock';
-import {GeneralInfo, ImageType} from "@/types";
+import { GeneralInfo, ImageType } from '@/types';
 
 interface ProjectCardProps {
   generalInfo: GeneralInfo;

@@ -3,7 +3,7 @@ import { Button } from '@/component/button';
 import { LeftArrow } from '@/assets/svg/leftArrow';
 import { RightArrow } from '@/assets/svg/rightArrow';
 import Image from 'next/image';
-import {ImageType} from "@/types";
+import { ImageType } from '@/types';
 
 interface ImageSliderProps {
   images: ImageType[];

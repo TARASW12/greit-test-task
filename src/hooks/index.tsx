@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { fetcher } from '@/api';
-import {Project} from "@/types";
+import { Project } from '@/types';
 
 interface UseFetchCardsProps {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
