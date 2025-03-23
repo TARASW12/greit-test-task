@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import { Heart } from '@/assets/svg/heart';
 import { Bedroom } from '@/assets/svg/bedroom';
 import { Bath } from '@/assets/svg/bath';
@@ -13,11 +13,16 @@ interface ProjectCardProps {
   images: ImageType[];
 }
 
-const data: { [key: string]: React.FC<{ className?: string }> } = {
-  bathrooms: Bath as React.FC<{ className?: string }>,
-  rooms: Bedroom as React.FC<{ className?: string }>,
-  size: Selection as React.FC<{ className?: string }>,
+type InfoItem = {
+  key: keyof Pick<GeneralInfo, 'bathrooms' | 'rooms' | 'size'>;
+  Icon: () => JSX.Element;
 };
+
+const infoItems: InfoItem[] = [
+  { key: 'bathrooms', Icon: Bath },
+  { key: 'rooms', Icon: Bedroom },
+  { key: 'size', Icon: Selection },
+];
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ generalInfo, images }) => {
   const { name, province, price, type } = generalInfo;
@@ -48,13 +53,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ generalInfo, images }) => {
         />
 
         <div className="flex items-center text-gray-500 text-sm mb-2">
-          {Object.entries(data).map(([key, Component], i, arr) => (
+          {infoItems.map(({ key, Icon }, i, arr) => (
             <React.Fragment key={key}>
               <div className="flex items-center space-x-1">
-                <Component className="w-5 h-5" />
-                <span>
-                  {JSON.stringify(generalInfo[key as keyof GeneralInfo])}
-                </span>
+                <Icon />
+                <span>{generalInfo[key]}</span>
               </div>
               {i < arr.length - 1 && <Split />}
             </React.Fragment>

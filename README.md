@@ -52,7 +52,6 @@ TypeScript
 
 Next.js
 
-
 Проєкт розгорнуто і доступний за посиланням:
 https://greit-test-task.vercel.app/
 
@@ -64,7 +63,6 @@ https://github.com/TARASW12/greit-test-task
 Клонувати репозиторій
 git clone https://github.com/TARASW12/greit-test-task.git
 
-
 Встановити залежності
 npm install
 
@@ -72,5 +70,3 @@ npm install
 npm run dev
 
 Проєкт відкриється за адресою http://localhost:3000
-
-

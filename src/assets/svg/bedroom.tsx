@@ -1,4 +1,6 @@
-export const Bedroom = () => {
+import { JSX } from 'react';
+
+export const Bedroom = (): JSX.Element => {
   return (
     <svg
       width="24px"
