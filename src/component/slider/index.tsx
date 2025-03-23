@@ -1,11 +1,11 @@
-import React, { useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { Button } from '@/component/button';
 import { LeftArrow } from '@/assets/svg/leftArrow';
 import { RightArrow } from '@/assets/svg/rightArrow';
-import Image from 'next/image';
 import { ImageType } from '@/types';
+import { MemoList } from '@/component/list';
 
-interface ImageSliderProps {
+export interface ImageSliderProps {
   images: ImageType[];
 }
 
@@ -14,7 +14,10 @@ export const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
   const sliderRef = useRef<HTMLDivElement>(null);
   const animatingRef = useRef<boolean>(false);
 
-  const slides = [images[images.length - 1], ...images, images[0]];
+  const slides = useMemo(() => {
+    if (images.length === 0) return [];
+    return [images[images.length - 1], ...images, images[0]];
+  }, [images]);
 
   const nextImage = () => {
     if (animatingRef.current) return;
@@ -39,6 +42,7 @@ export const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
     setCurrent(updatedCurrent);
     animatingRef.current = false;
   };
+
   if (!images || images.length === 0) {
     return <div>Немає зображень</div>;
   }
@@ -56,17 +60,7 @@ export const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
         }}
         onTransitionEnd={handleTransitionEnd}
       >
-        {slides.map((img, index) => (
-          <div key={index} className="min-w-full">
-            <Image
-              width={800}
-              height={800}
-              src={img.medium}
-              alt={`Picture ${index}`}
-              className="h-full w-full aspect-[16/12] object-cover"
-            />
-          </div>
-        ))}
+        <MemoList slides={slides} />
       </div>
 
       <Button onClick={prevImage} icon={LeftArrow} position="left" />
